@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Ασκήσεις</title>
+  <script>
+    // Άσκηση 1
+    // Ορισμός μεταβλητής με όνομα film_json
+    let film_json = `{
+      "title": "Inception",
+      "director": "Christopher Nolan",
+      "releaseYear": 2010,
+      "rating": 8.8,
+      "cast": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"]
+    }`;
+
+    // Μετατροπή της συμβολοσειράς JSON σε αντικείμενο JavaScript
+    let film = JSON.parse(film_json);
+
+    // Προσθήκη ηθοποιών στο τέλος της λίστας cast
+    film.cast.push("Tom Hardy", "Cillian Murphy");
+
+    // Εκτύπωση του αντικειμένου film στην κονσόλα, μορφοποιημένο
+    console.log(JSON.stringify(film, null, 2));
+
+    // Άσκηση 2 - Μέρος Α
+    fetch('https://dummyjson.com/products')
+      .then(response => response.json())
+      .then(data => {
+        const products = data.products.slice(0, 5).map(product => ({
+          id: product.id,
+          title: product.title,
+          category: product.category,
+          stock: product.stock
+        }));
+        console.log(products);
+      })
+      .catch(error => console.error('Error:', error));
+
+    // Άσκηση 2 - Μέρος Β
+    async function fetchProducts() {
+      try {
+        const response = await fetch('https://dummyjson.com/products');
+        const data = await response.json();
+        const products = data.products.slice(0, 5).map(product => ({
+          id: product.id,
+          title: product.title,
+          category: product.category,
+          stock: product.stock
+        }));
+        console.log(products);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Κλήση της συνάρτησης
+    fetchProducts();
+  </script>
+</head>
+<body>
+  <h1>Ασκήσεις</h1>
+  <p>Δείτε την κονσόλα του περιηγητή για τα αποτελέσματα.</p>
+</body>
+</html>
